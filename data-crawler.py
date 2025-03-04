@@ -5,7 +5,11 @@ import pandas as pd
 API_KEY = "63716794310649c0b1e8bc0666df7902"
 BASE_URL = "https://www.reb.or.kr/r-one/openapi/SttsApiTblData.do"
 
-# 전국 + 각 지역 분류 코드 (전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원)
+# 데이터별 STATBL_ID
+RENTAL_STATBL_ID = "TT249843134237374"  # 오피스 임대료 데이터
+VACANCY_STATBL_ID = "TT244763134428698"  # 오피스 공실률 데이터
+
+# 전국 + 각 지역 분류 코드 (서울 주요 권역 포함)
 region_codes = {
     "서울전체": "500002",
     "GBD": "510003",
@@ -47,40 +51,66 @@ region_codes = {
 all_data = []
 
 for region_name, cls_id in region_codes.items():
-    # 요청 파라미터 설정
-    params = {
+    # 🔹 임대료 데이터 요청
+    params_rental = {
         "KEY": API_KEY,
         "Type": "json",
         "pIndex": 1,
         "pSize": 100,
-        "STATBL_ID": "TT249843134237374",  # 오피스 임대료 데이터
+        "STATBL_ID": RENTAL_STATBL_ID,  # 임대료 데이터 코드
         "DTACYCLE_CD": "QY",  # 분기별 데이터
-        "CLS_ID": cls_id,  # 지역 코드 (반복문으로 변경)
-        "ITM_ID": "100001"  # 임대료
+        "CLS_ID": cls_id,  # 지역 코드
+        "ITM_ID": "100001"  # 임대료 ITM_ID
     }
 
-    # API 요청
-    response = requests.get(BASE_URL, params=params)
+    response_rental = requests.get(BASE_URL, params=params_rental)
 
-    # 응답 데이터 확인
-    if response.status_code == 200:
-        data = response.json()
-        if "SttsApiTblData" in data:
-            rental_data = data["SttsApiTblData"][1]["row"]  # 필요한 데이터 추출
-            df = pd.DataFrame(rental_data)  # DataFrame 변환
-            df["지역"] = region_name  # 지역명 컬럼 추가
-            all_data.append(df)
+    if response_rental.status_code == 200:
+        data_rental = response_rental.json()
+        if "SttsApiTblData" in data_rental:
+            rental_data = data_rental["SttsApiTblData"][1]["row"]
+            df_rental = pd.DataFrame(rental_data)
+            df_rental["지역"] = region_name
+            df_rental["지표"] = "임대료"
+            all_data.append(df_rental)
         else:
-            print(f"❌ {region_name} 데이터 없음:", data)
+            print(f"❌ {region_name} 임대료 데이터 없음:", data_rental)
     else:
-        print(f"🚨 API 요청 실패 ({region_name}):", response.status_code, response.text)
+        print(f"🚨 API 요청 실패 ({region_name} - 임대료):", response_rental.status_code, response_rental.text)
 
-# 모든 지역 데이터 합치기
+    # 🔹 공실률 데이터 요청
+    params_vacancy = {
+        "KEY": API_KEY,
+        "Type": "json",
+        "pIndex": 1,
+        "pSize": 100,
+        "STATBL_ID": VACANCY_STATBL_ID,  # 공실률 데이터 코드
+        "DTACYCLE_CD": "QY",  # 분기별 데이터
+        "CLS_ID": cls_id,  # 지역 코드
+        "ITM_ID": "100001"  # 공실률 ITM_ID (정확한 값 확인 필요)
+    }
+
+    response_vacancy = requests.get(BASE_URL, params=params_vacancy)
+
+    if response_vacancy.status_code == 200:
+        data_vacancy = response_vacancy.json()
+        if "SttsApiTblData" in data_vacancy:
+            vacancy_data = data_vacancy["SttsApiTblData"][1]["row"]
+            df_vacancy = pd.DataFrame(vacancy_data)
+            df_vacancy["지역"] = region_name
+            df_vacancy["지표"] = "공실률"
+            all_data.append(df_vacancy)
+        else:
+            print(f"❌ {region_name} 공실률 데이터 없음:", data_vacancy)
+    else:
+        print(f"🚨 API 요청 실패 ({region_name} - 공실률):", response_vacancy.status_code, response_vacancy.text)
+
+# 🔹 모든 데이터 합치기
 if all_data:
     final_df = pd.concat(all_data, ignore_index=True)
 
     # CSV로 저장
-    final_df.to_csv("오피스_임대료_서울.csv", encoding="utf-8-sig", index=False)
-    print("✅ 모든 지역 데이터 저장 완료: 오피스_임대료_서울.csv")
+    final_df.to_csv("오피스_임대료_공실률_서울.csv", encoding="utf-8-sig", index=False)
+    print("✅ 모든 지역 임대료 + 공실률 데이터 저장 완료: 오피스_임대료_공실률_서울.csv")
 else:
     print("⚠️ 데이터가 없습니다.")
