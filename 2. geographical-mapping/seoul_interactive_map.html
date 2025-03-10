@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f9b7581e8d6c7e638e5d2c871a759731 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_f9b7581e8d6c7e638e5d2c871a759731" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f9b7581e8d6c7e638e5d2c871a759731 = L.map(
+                "map_f9b7581e8d6c7e638e5d2c871a759731",
+                {
+                    center: [37.5665, 126.978],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d069c46ab6202ece49e2cd8aa068c8e1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d069c46ab6202ece49e2cd8aa068c8e1.addTo(map_f9b7581e8d6c7e638e5d2c871a759731);
+        
+    
+            var marker_7d4119539d0cada988eb5625a5b64ae3 = L.marker(
+                [37.4979, 127.0276],
+                {
+}
+            ).addTo(map_f9b7581e8d6c7e638e5d2c871a759731);
+        
+    
+        var popup_2359d1036e5173e5585c8a5716b11967 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_724bca84ec45718d3b85ba6cad5ea6dd = $(`<div id="html_724bca84ec45718d3b85ba6cad5ea6dd" style="width: 100.0%; height: 100.0%;">     <b>강남</b><br>     📌 임대료: 35000 원<br>     📌 공실률: 5.2 %<br>     📌 투자수익률: 4.8 %<br>     </div>`)[0];
+                popup_2359d1036e5173e5585c8a5716b11967.setContent(html_724bca84ec45718d3b85ba6cad5ea6dd);
+            
+        
+
+        marker_7d4119539d0cada988eb5625a5b64ae3.bindPopup(popup_2359d1036e5173e5585c8a5716b11967)
+        ;
+
+        
+    
+    
+            marker_7d4119539d0cada988eb5625a5b64ae3.bindTooltip(
+                `<div>
+                     강남
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d639b9007657386a8aa777bd790cf014 = L.marker(
+                [37.5281, 126.9249],
+                {
+}
+            ).addTo(map_f9b7581e8d6c7e638e5d2c871a759731);
+        
+    
+        var popup_e03eb9ff7ecf90fa08d9d9737449df54 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_daef160ddad49c7cca8bb292b97fbb3a = $(`<div id="html_daef160ddad49c7cca8bb292b97fbb3a" style="width: 100.0%; height: 100.0%;">     <b>여의도</b><br>     📌 임대료: 28000 원<br>     📌 공실률: 7.1 %<br>     📌 투자수익률: 4.5 %<br>     </div>`)[0];
+                popup_e03eb9ff7ecf90fa08d9d9737449df54.setContent(html_daef160ddad49c7cca8bb292b97fbb3a);
+            
+        
+
+        marker_d639b9007657386a8aa777bd790cf014.bindPopup(popup_e03eb9ff7ecf90fa08d9d9737449df54)
+        ;
+
+        
+    
+    
+            marker_d639b9007657386a8aa777bd790cf014.bindTooltip(
+                `<div>
+                     여의도
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d0edb0795b5d5cc44b25eb8b6437d851 = L.marker(
+                [37.5716, 126.9769],
+                {
+}
+            ).addTo(map_f9b7581e8d6c7e638e5d2c871a759731);
+        
+    
+        var popup_ecbf41507992ff10e8f90c15c1f64bb3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_231e7995037b2cfd11941eb1aa1dfac3 = $(`<div id="html_231e7995037b2cfd11941eb1aa1dfac3" style="width: 100.0%; height: 100.0%;">     <b>광화문</b><br>     📌 임대료: 30000 원<br>     📌 공실률: 6.8 %<br>     📌 투자수익률: 4.7 %<br>     </div>`)[0];
+                popup_ecbf41507992ff10e8f90c15c1f64bb3.setContent(html_231e7995037b2cfd11941eb1aa1dfac3);
+            
+        
+
+        marker_d0edb0795b5d5cc44b25eb8b6437d851.bindPopup(popup_ecbf41507992ff10e8f90c15c1f64bb3)
+        ;
+
+        
+    
+    
+            marker_d0edb0795b5d5cc44b25eb8b6437d851.bindTooltip(
+                `<div>
+                     광화문
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
